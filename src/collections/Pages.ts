@@ -10,18 +10,6 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
   },
 
-  hooks: {
-    afterChange: [
-      ({ data }) => {
-        if (data.title && !data.slug) {
-          data.slug = data.title.toLowerCase().replaceAll(' ', '-');
-        }
-
-        return data;
-      },
-    ],
-  },
-
   fields: [
     {
       name: 'title',
@@ -37,6 +25,7 @@ export const Pages: CollectionConfig = {
 
       admin: {
         position: 'sidebar',
+        readOnly: true,
       },
     },
 

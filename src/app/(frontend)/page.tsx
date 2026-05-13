@@ -22,15 +22,11 @@ export default async function HomePage() {
     return notFound();
   }
 
-  console.log('result', result);
-
   return (
-    <main>
+    <>
       <h1>{page.title}</h1>
       <h2>{page.layout?.[0].heading}</h2>
       <h2>{page.layout?.[0].description}</h2>
-
-      {/* здесь рендеришь template / layout blocks */}
-    </main>
+    </>
   );
 }

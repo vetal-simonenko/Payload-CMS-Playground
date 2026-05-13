@@ -25,7 +25,7 @@ export async function Header() {
     <header>
       <Link href="/">
         {logo?.url ? (
-          <Image src={logo.url} alt={logo.alt || 'Logo'} width={120} height={40} />
+          <Image src={logo.url} alt={logo.alt || 'Logo'} priority width={120} height={45} />
         ) : (
           'Logo'
         )}
