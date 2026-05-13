@@ -1,10 +1,12 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  lockDocuments: false,
   access: {
     read: () => true,
   },
+  folders: true,
   fields: [
     {
       name: 'alt',
@@ -13,4 +15,4 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: true,
-}
+};

@@ -69,7 +69,7 @@ plugin-<name>/
     ├── fields/               # Custom field components (optional)
     │   ├── FieldName/
     │   │   ├── index.ts      # Field config
-    │   │   └── Component.tsx # Client component
+    │   │   └── Hero.tsx # Client component
     ├── exports/              # Additional entry points
     │   ├── types.ts          # Type-only exports
     │   ├── fields.ts         # Field-only exports
@@ -78,7 +78,7 @@ plugin-<name>/
     ├── translations/         # i18n translations (optional)
     │   └── index.ts
     └── ui/                   # Admin UI components (optional)
-        └── Component.tsx
+        └── Hero.tsx
 ```
 
 **Key additions from official template:**
@@ -659,7 +659,7 @@ import type { MyPluginConfig } from '@payloadcms/plugin-example/types'
 ### Custom Field Component
 
 ```tsx
-// src/fields/CustomField/Component.tsx
+// src/fields/CustomField/Hero.tsx
 'use client'
 import { useField } from '@payloadcms/ui'
 import type { TextFieldClientComponent } from 'payload'
