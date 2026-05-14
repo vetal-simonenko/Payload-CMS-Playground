@@ -1,8 +1,13 @@
 // src/app/blog/[slug]/page.tsx
 
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
+
 import { getPayload } from 'payload';
 import config from '@payload-config';
+
+import { Box, Chip, Divider, Stack, Typography } from '@mui/material';
+import Link from 'next/link';
 
 type Props = {
   params: Promise<{
@@ -23,6 +28,7 @@ export default async function PostPage({ params }: Props) {
       },
     },
     limit: 1,
+    depth: 1,
   });
 
   const post = result.docs[0];
@@ -31,34 +37,118 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
+  const image = typeof post.featuredImage === 'object' ? post.featuredImage : null;
+
   const paragraphs =
     post.content?.root?.children
       ?.filter((node: any) => node.type === 'paragraph')
-      ?.map((paragraph: any) => paragraph.children?.map((child: any) => child.text).join('')) || [];
+      ?.map((paragraph: any) => paragraph.children?.map((child: any) => child.text).join(''))
+      ?.filter(Boolean) || [];
 
   return (
-    <div className="container mx-auto py-10">
-      <article className="max-w-3xl">
-        <h1 className="mb-4 text-4xl font-bold">{post.title}</h1>
+    <Box
+      component="article"
+      sx={{
+        maxWidth: 860,
+        mx: 'auto',
+      }}
+    >
+      {image?.url && (
+        <Box
+          sx={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '100%',
+            height: {
+              xs: 200,
+              sm: 250,
+              md: 300,
+            },
+            mb: 5,
+            overflow: 'hidden',
+          }}
+        >
+          <Image
+            src={image.url}
+            alt={image.alt || post.title}
+            fill
+            priority
+            sizes="100vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+          />
+        </Box>
+      )}
 
-        <p className="mb-4 text-sm text-gray-500">
-          {new Date(post.createdAt).toLocaleDateString()}
-        </p>
+      <Stack
+        direction="row"
+        spacing={1}
+        useFlexGap
+        sx={{
+          mb: 3,
+          flexWrap: 'wrap',
+        }}
+      >
+        {post.categories?.map((category: any) => {
+          if (typeof category !== 'object') return null;
 
-        <div className="mb-8 flex gap-2">
-          {post.categories?.map((category: any) => (
-            <span key={category.id} className="rounded bg-gray-200 px-3 py-1 text-sm">
-              {category.title}
-            </span>
-          ))}
-        </div>
+          return (
+            <Link
+              key={category.id}
+              href={`/blog/category/${category.slug}`}
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <Chip
+                label={category.title}
+                size="small"
+                color="primary"
+                variant="outlined"
+                clickable
+              />
+            </Link>
+          );
+        })}
+      </Stack>
 
-        <div className="space-y-4">
-          {paragraphs.map((text: string, index: number) => (
-            <p key={index}>{text}</p>
-          ))}
-        </div>
-      </article>
-    </div>
+      <Typography
+        variant="h1"
+        sx={{
+          mb: 2,
+        }}
+      >
+        {post.title}
+      </Typography>
+
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
+        {new Date(post.createdAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </Typography>
+
+      <Divider sx={{ mb: 4 }} />
+
+      <Box
+        sx={{
+          '& p': {
+            mb: 3,
+            fontSize: 18,
+            lineHeight: 1.8,
+            color: 'text.primary',
+          },
+        }}
+      >
+        {paragraphs.map((text: string, index: number) => (
+          <Typography key={index} component="p">
+            {text}
+          </Typography>
+        ))}
+      </Box>
+    </Box>
   );
 }
