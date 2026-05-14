@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { formBuilderPlugin } from '@payloadcms/plugin-form-builder';
 import path from 'path';
 import { buildConfig } from 'payload';
 import { fileURLToPath } from 'url';
@@ -36,5 +37,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [formBuilderPlugin({})],
 });

@@ -30,6 +30,17 @@ export const Pages: CollectionConfig = {
     },
 
     {
+      name: 'form',
+      type: 'relationship',
+      relationTo: 'forms',
+      label: 'Form',
+      admin: {
+        position: 'sidebar',
+        condition: (_, siblingData) => siblingData?.template === 'contact',
+      },
+    },
+
+    {
       name: 'parent',
       type: 'relationship',
       relationTo: 'pages',
