@@ -91,9 +91,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
-    'payload-locked-documents':
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
@@ -240,6 +238,11 @@ export interface Post {
   title: string;
   slug: string;
   categories?: (number | Category)[] | null;
+  featuredImage?: (number | null) | Media;
+  /**
+   * Short text for post cards and SEO preview.
+   */
+  excerpt?: string | null;
   content?: {
     root: {
       type: string;
@@ -412,6 +415,8 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   categories?: T;
+  featuredImage?: T;
+  excerpt?: T;
   content?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -577,6 +582,7 @@ export interface CollectionsWidget {
 export interface Auth {
   [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
