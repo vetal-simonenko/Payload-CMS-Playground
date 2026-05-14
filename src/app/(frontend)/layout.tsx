@@ -1,5 +1,7 @@
 import React from 'react';
-import './styles.css';
+import { Box } from '@mui/material';
+
+import { Providers } from './providers';
 import { Header } from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -14,9 +16,30 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <Providers>
+          <Box
+            id="wrapper"
+            sx={{
+              minHeight: '100vh',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <Header />
+
+            <Box
+              component="main"
+              id="main"
+              sx={{
+                flexGrow: 1,
+              }}
+            >
+              {children}
+            </Box>
+
+            <Footer />
+          </Box>
+        </Providers>
       </body>
     </html>
   );
