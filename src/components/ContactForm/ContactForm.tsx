@@ -28,10 +28,6 @@ const initialState = {
 export function ContactForm({ form }: Props) {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
 
-  if (state.success) {
-    return <Alert severity="success">{getConfirmationMessage(form)}</Alert>;
-  }
-
   return (
     <Box
       component="form"
@@ -43,6 +39,8 @@ export function ContactForm({ form }: Props) {
       }}
     >
       <input type="hidden" name="form" value={form.id} />
+
+      {state.success && <Alert severity="success">{getConfirmationMessage(form)}</Alert>}
 
       {form.fields?.map((field: any) => {
         const commonProps = {
