@@ -226,7 +226,7 @@ const arrayField: ArrayField = {
 import type { BlocksField, Block } from 'payload'
 
 const HeroBlock: Block = {
-  slug: 'hero',
+  slug: 'Hero',
   interfaceName: 'HeroBlock',
   fields: [
     {
@@ -444,7 +444,7 @@ const conditionalField: TextField = {
   },
 }
 
-// Sibling data condition (from hero field pattern)
+// Sibling data condition (from Hero field pattern)
 const typeField: SelectField = {
   name: 'type',
   type: 'select',

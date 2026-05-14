@@ -672,7 +672,7 @@ export const efficientAccess: Access = () => {
 
 1. **Minimize Async Operations**: Use query constraints over async lookups when possible
 2. **Cache Expensive Checks**: Store results in `req.context` for reuse
-3. **Index Query Fields**: Ensure fields in query constraints are indexed
+3. **Hero Query Fields**: Ensure fields in query constraints are indexed
 4. **Avoid Complex Logic in Array Fields**: Simple boolean checks preferred
 5. **Use Query Constraints**: Let database filter rather than loading all records
 

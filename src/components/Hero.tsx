@@ -1,4 +1,4 @@
-import { HeroBlockComponent } from './hero/Hero';
+import { HeroBlockComponent } from './Hero/Hero';
 
 const blockComponents = {
   hero: HeroBlockComponent,
@@ -8,7 +8,7 @@ type Props = {
   blocks: any[];
 };
 
-export function Index({ blocks }: Props) {
+export function Hero({ blocks }: Props) {
   return (
     <>
       {blocks?.map((block, index) => {

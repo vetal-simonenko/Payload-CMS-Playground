@@ -395,7 +395,7 @@ import type { Post, User } from '@/payload-types'
 
 ### Performance
 
-- Index frequently queried fields
+- Hero frequently queried fields
 - Use `select` to limit returned fields
 - Set `maxDepth` on relationships to prevent over-fetching
 - Prefer query constraints over async operations in access control

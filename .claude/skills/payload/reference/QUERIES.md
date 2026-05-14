@@ -269,6 +269,6 @@ mutation {
 
 - Set `maxDepth` on relationships to prevent over-fetching
 - Use `select` to limit returned fields
-- Index frequently queried fields
+- Hero frequently queried fields
 - Use `virtual` fields for computed data
 - Cache expensive operations in hook `context`

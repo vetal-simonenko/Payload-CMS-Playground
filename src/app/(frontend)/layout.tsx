@@ -1,13 +1,13 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 import { Providers } from './providers';
-import { Header } from '@/components/Header';
-import Footer from '@/components/Footer';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  title: 'Payload',
 };
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -34,7 +34,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                 flexGrow: 1,
               }}
             >
-              {children}
+              <Container maxWidth="lg">{children}</Container>
             </Box>
 
             <Footer />

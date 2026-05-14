@@ -5,6 +5,7 @@ import { getPayload } from 'payload';
 import config from '@payload-config';
 
 import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material';
+import NavLink from '@/components/Header/NavLink';
 
 function getPageHref(page: any) {
   if (!page) return '#';
@@ -14,7 +15,7 @@ function getPageHref(page: any) {
   return `/${page.fullPath || page.slug}`;
 }
 
-export async function Header() {
+const Header = async () => {
   const payload = await getPayload({ config });
 
   const header = await payload.findGlobal({
@@ -105,23 +106,7 @@ export async function Header() {
                       },
                     }}
                   >
-                    <Link
-                      href={getPageHref(page)}
-                      style={{
-                        textDecoration: 'none',
-                        color: 'inherit',
-                      }}
-                    >
-                      <Button
-                        color="inherit"
-                        sx={{
-                          color: 'text.primary',
-                          fontWeight: 500,
-                        }}
-                      >
-                        {item.label}
-                      </Button>
-                    </Link>
+                    <NavLink href={getPageHref(page)} label={item.label} />
 
                     {hasChildren && (
                       <Box
@@ -157,28 +142,12 @@ export async function Header() {
 
                           return (
                             <Box key={child.id} component="li">
-                              <Link
+                              <NavLink
                                 href={getPageHref(childPage)}
-                                style={{
-                                  display: 'block',
-                                  textDecoration: 'none',
-                                  color: 'inherit',
-                                }}
-                              >
-                                <Button
-                                  fullWidth
-                                  variant="text"
-                                  color="inherit"
-                                  size="small"
-                                  sx={{
-                                    justifyContent: 'flex-start',
-                                    color: 'text.secondary',
-                                    textTransform: 'none',
-                                  }}
-                                >
-                                  {child.label}
-                                </Button>
-                              </Link>
+                                label={child.label}
+                                fullWidth
+                                small
+                              />
                             </Box>
                           );
                         })}
@@ -193,4 +162,6 @@ export async function Header() {
       </Container>
     </AppBar>
   );
-}
+};
+
+export default Header;

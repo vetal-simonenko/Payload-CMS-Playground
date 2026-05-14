@@ -1,7 +1,7 @@
 import { getPayload } from 'payload';
 import config from '@payload-config';
 
-import { Box, Container, Divider, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 
 const Footer = async () => {
   const payload = await getPayload({ config });
